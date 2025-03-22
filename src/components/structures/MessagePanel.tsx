@@ -974,12 +974,10 @@ export default class MessagePanel extends React.Component<IProps, IState> {
     private onTypingHidden = (): void => {
         const scrollPanel = this.scrollPanel.current;
         if (scrollPanel) {
-            // as hiding the typing notifications doesn't
-            // update the scrollPanel, we tell it to apply
-            // the shrinking prevention once the typing notifs are hidden
-            scrollPanel.updatePreventShrinking();
-            // order is important here as checkScroll will scroll down to
-            // reveal added padding to balance the notifs disappearing.
+            // we clear prevent shrinking so that no
+            // empty space is created below the messages
+            scrollPanel.clearPreventShrinking();
+            // order is important here
             scrollPanel.checkScroll();
         }
     };
